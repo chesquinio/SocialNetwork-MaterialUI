@@ -1,16 +1,19 @@
-import { Box, useMediaQuery } from '@mui/material'
-import Navbar from 'scenes/navbar'
-import UserWidget from 'scenes/widgets/UserWidget'
-import { useSelector } from 'react-redux';
-import MyPostWidget from "scenes/widgets/MyPostWidget"
+import { Box, useMediaQuery } from "@mui/material";
+import Navbar from "scenes/navbar";
+import UserWidget from "scenes/widgets/UserWidget";
+import { useSelector } from "react-redux";
+import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
+import AdvertWidget from "scenes/widgets/AdvertWidget";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
 
 function HomePage() {
-  const isNonMobileScreens = useMediaQuery("(min-width:1000px)")
-  const {_id, picturePath} = useSelector((state) => state.user)
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  const { _id, picturePath } = useSelector((state) => state.user);
 
   return (
     <Box>
-      <Navbar/>
+      <Navbar />
       <Box
         width="100%"
         padding="2rem 6%"
@@ -21,20 +24,23 @@ function HomePage() {
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
         </Box>
-        <Box 
+        <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget picturePath={picturePath} />
+          <PostsWidget userId={_id} />
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
-
-          </Box>  
+            <AdvertWidget />
+            <Box m="2rem 0" />
+            <FriendListWidget userId={_id} />
+          </Box>
         )}
       </Box>
     </Box>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

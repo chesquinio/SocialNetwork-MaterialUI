@@ -68,5 +68,5 @@ app.listen(PORT, ()=> {
 
     // Insert data to test server
     // User.insertMany(users)
-    // Post.insertMany(posts)
+    //Post.insertMany(posts)
 })
